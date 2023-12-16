@@ -1,0 +1,34 @@
+{% extends "index.html" %} 
+
+        {% block content %}
+            <div class="table">
+                <h2 class="text-xl mb-2">Appointments Table</h2>
+                <table class="table-auto">
+                    <thead>
+                        <tr>
+                            <th class="px-4 py-2">Appointment ID</th>
+                            <th class="px-4 py-2">Doctor ID</th>
+                            <th class="px-4 py-2">Patient First Name</th>
+                            <th class="px-4 py-2">Patient Last Name</th>
+                            <th class="px-4 py-2">Appointment Date</th>
+                            <th class="px-4 py-2">Appointment Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for appointments in data3 %}
+                        <tr>
+                            <td class="border px-4 py-2">{{ appointments.appointment_id }}</td>
+                            <td class="border px-4 py-2">{{ appointments.doctor_id }}</td>
+                            <td class="border px-4 py-2">{{ appointments.patient_first_name }}</td>
+                            <td class="border px-4 py-2">{{ appointments.patient_last_name }}</td>
+                            <td class="border px-4 py-2">{{ appointments.appointment_date }}</td>
+                            <td class="border px-4 py-2">{{ appointments.appointment_time }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <br/>
+
+        {% endblock %}

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylefile.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>Welcome to the Haley's Flask Application!</title>
+
+</head>
+
+<body></body>
+    <header style="background-color: rgb(221, 160, 221);" class="text-white p-4">
+    <h1 class="text-2xl">MySQL Flask Database</h1>
+        <nav>
+            <ul class="flex space-x-4">
+                <li><a href="/login/">Google Login Page</li>
+                <li><a href="/doctors" class="hover:underline">Doctors Table</a></li>
+                <li><a href="/patients" class="hover:underline">Patients Table</a></li>
+                <li><a href="/appointments" class="hover:underline">Appointments Table</a></li>
+            </ul>
+        </nav>
+    </header>  
+
+        {% block content %}{% endblock %}
+        <footer style="background-color: rgb(221, 160, 221);" class="text-white p-4 mt-6">
+        </footer>
+</body>
+</html>

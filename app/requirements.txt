@@ -1,0 +1,4 @@
+flask
+pandas
+authlib
+requests
