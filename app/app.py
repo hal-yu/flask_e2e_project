@@ -1,14 +1,31 @@
 from flask import Flask, render_template, request, url_for, redirect, session
 import pandas as pd
+from flask_session import Session
 from authlib.integrations.flask_client import OAuth
 from authlib.common.security import generate_token
 from oauth.db_functions import update_or_create_user
 import os
+import logging
 from dotenv import load_dotenv
 from pandas import read_sql
 from sqlalchemy import create_engine, text 
 
 load_dotenv() 
+
+logging.basicConfig(
+    level=logging.DEBUG,
+    filename="/home/haley_yu/flask_e2e_project/logs/app.log",
+    filemode="w",
+    format='%(levelname)s - %(name)s - %(message)s'
+)
+
+app = Flask(__name__)
+
+app.secret_key = os.urandom(12)
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_TYPE"] = "filesystem"
+Session(app)
+oauth = OAuth(app)
 
 # Database connection settings from environment variables
 DB_HOST = os.getenv("DB_HOST")
@@ -27,13 +44,14 @@ GOOGLE_CLIENT_SECRET = os.getenv('GOOGLE_CLIENT_SECRET')
 # Create a database engine
 engine = create_engine(conn_string, echo=False)
 
-app = Flask(__name__)
-app.secret_key = os.urandom(12)
-oauth = OAuth(app)
-
-@app.route('/')
+@app.route("/")
 def index():
-    return render_template('index.html')
+    try:
+        logging.debug("You have successfully accessed the index page!")
+        return render_template('index.html')
+    except Exception as e:
+        logging.error(f"an error occured! {e}")
+        return "Please try again!"
 
 @app.route('/login/')
 def google():
@@ -64,7 +82,7 @@ def google_auth():
     token = oauth.google.authorize_access_token()
     user = oauth.google.parse_id_token(token, nonce=session['nonce'])
     session['user'] = user
-    update_or_create_user(user)
+    #update_or_create_user(user)
     print(" Google User ", user)
     return redirect('/dashboard')
 
@@ -81,6 +99,14 @@ def logout():
     session.pop('user', None)
     return redirect('/')
     
+@app.route('/data')
+def hospital_reports():
+    with engine.connect() as connection:
+        query4 = text('SELECT * FROM hospital_reports')
+        result4 = connection.execute(query4)
+        db_data4 = result4.fetchall()
+    return render_template('hospital_reports.html', data4=db_data4)
+
 @app.route('/patients')
 def patients():
     with engine.connect() as connection:
@@ -105,5 +131,15 @@ def appointments():
         db_data3 = result3.fetchall()
     return render_template('appointments.html', data3=db_data3)
 
+@app.route("/error")
+def error():
+    try:
+        output = 1/0
+        logging.debug("Success!!")
+        return output
+    except Exception as e:
+        logging.error(f"an error occured! {e}")
+        return "Please Try Again!"
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)

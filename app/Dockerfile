@@ -1,4 +1,4 @@
-FROM python:3.7-alpine
+FROM python:3.9.2
 # FROM - prebuilt package for Docker
 
 WORKDIR /app

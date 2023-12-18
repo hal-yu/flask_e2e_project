@@ -1,0 +1,35 @@
+{% extends "index.html" %} 
+
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylefile.css') }}">
+</head>
+
+        {% block content %}
+            <div class="table">
+                <h2 class="text-xl mb-2">Hospital Reporting Data</h2>
+                <table class="table-auto">
+                    <thead>
+                        <tr>
+                            <th class="px-4 py-2">State</th>
+                            <th class="px-4 py-2">Reported</th>
+                            <th class="px-4 py-2">Total</th>
+                            <th class="px-4 py-2">Percent Reported</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for hospital_reports in data4 %}
+                        <tr>
+                            <td class="border px-4 py-2">{{ hospital_reports.State}}</td>
+                            <td class="border px-4 py-2">{{ hospital_reports.Reported}}</td>
+                            <td class="border px-4 py-2">{{ hospital_reports.Total }}</td>
+                            <td class="border px-4 py-2">{{ hospital_reports.Percentage_reporting}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <br/>
+
+        {% endblock %}

@@ -1,4 +1,10 @@
 flask
-pandas
+Flask-Session
+Jinja2
+Werkzeug
+python-dotenv
+pandas 
 authlib
 requests
+sqlalchemy
+pymysql

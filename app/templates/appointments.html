@@ -1,5 +1,9 @@
 {% extends "index.html" %} 
 
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylefile.css') }}">
+</head>
+
         {% block content %}
             <div class="table">
                 <h2 class="text-xl mb-2">Appointments Table</h2>
