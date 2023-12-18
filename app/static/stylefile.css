@@ -2,12 +2,12 @@
     justify-content: center;
     flex-direction: row;
     display: flex;
-    background-color: rgb(218, 178, 178);
+    background-color: rgb(255, 255, 255);
     justify-content: center;
     align-items: center;
     width: 350px;
     padding: 10px;
-    box-shadow: 3px 3px 3px rgb(168, 128, 128);
+    box-shadow: 3px 3px 3px rgb(0, 0, 0);
     border-radius: 15px;
 }
 .btn-text {
@@ -19,14 +19,20 @@
 
 h1 {
     font-family: 'Aclonica';
-    font-size: 22px;
+    font-size: 48px;
     color: rgb(0, 0, 0);
 }
 
 h2 {
     font-family: 'Cinzel', serif;
-    font-size: 48px;
-    color: rgb(212, 122, 200);
+    font-size: 22px;
+    color:rgb(219, 92, 92);
+}
+
+h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 22px;
+    color:rgb(0, 0, 0);
 }
 
 body {
@@ -35,25 +41,21 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 100vh;
-    background-color: #f5f5f5;
 }
 
-header {
-    text-align: left;
-    margin-bottom: 20px; 
-    width: 100%; 
-    padding: 10px;
+.content {
+    width: 80%;
+    max-width: 1200px; /* Set a maximum width if needed */
+    margin: 0 auto; /* Center the content horizontally */
 }
 
-.content-container {
-    text-align: center;
+.table-container {
+    margin-top: 20px; /* Add spacing between tables if needed */
+    display: flex;
+    justify-content: center;
 }
 
-header, footer {
-    text-align: center;
-    background-color: rgb(164, 250, 243);
-    color: rgb(164, 250, 243);
-    padding: 10px; 
+footer {
     width: 100%;
+    margin-top: 20px; /* Add spacing between content and footer if needed */
 }
