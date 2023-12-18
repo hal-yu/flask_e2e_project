@@ -19,6 +19,7 @@ logging.basicConfig(
     format='%(levelname)s - %(name)s - %(message)s'
 )
 
+
 app = Flask(__name__)
 
 app.secret_key = os.urandom(12)

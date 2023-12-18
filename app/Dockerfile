@@ -10,8 +10,8 @@ COPY . /app
 RUN pip install -r requirements.txt
 # RUN - Take requirements.txt file and install whatever is in the file 
 
-EXPOSE 5000
-# EXPOSE - Expose Port 5000 to operating shell
+EXPOSE 8080
+# EXPOSE - Expose Port 8000 to operating shell
 
 CMD ["python","app.py"]
 # CMD - Ready to start application we want docker to run
