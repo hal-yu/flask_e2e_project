@@ -14,11 +14,10 @@ load_dotenv()
 
 logging.basicConfig(
     level=logging.DEBUG,
-    filename="/home/haley_yu/flask_e2e_project/logs/app.log",
+    filename="logs/app.log",
     filemode="w",
     format='%(levelname)s - %(name)s - %(message)s'
 )
-
 
 app = Flask(__name__)
 
@@ -33,17 +32,18 @@ DB_HOST = os.getenv("DB_HOST")
 DB_DATABASE = os.getenv("DB_DATABASE")
 DB_USERNAME = os.getenv("DB_USERNAME")
 DB_PASSWORD = os.getenv("DB_PASSWORD")
+DB_PORT = int(os.getenv("DB_PORT", 3306))
+
 
 # Connection string
 conn_string = (
-    f"mysql+pymysql://{DB_USERNAME}:{DB_PASSWORD}@{DB_HOST}/{DB_DATABASE}"
+    f"mysql+pymysql://{DB_USERNAME}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_DATABASE}"
 )
+engine = create_engine(conn_string, echo=False)
 
+## Connection settings for the Goolge OAuth
 GOOGLE_CLIENT_ID = os.getenv('GOOGLE_CLIENT_ID')
 GOOGLE_CLIENT_SECRET = os.getenv('GOOGLE_CLIENT_SECRET')
-
-# Create a database engine
-engine = create_engine(conn_string, echo=False)
 
 @app.route("/")
 def index():
@@ -83,7 +83,7 @@ def google_auth():
     token = oauth.google.authorize_access_token()
     user = oauth.google.parse_id_token(token, nonce=session['nonce'])
     session['user'] = user
-    #update_or_create_user(user)
+    update_or_create_user(user)
     print(" Google User ", user)
     return redirect('/dashboard')
 
@@ -107,14 +107,14 @@ def hospital_reports():
         result4 = connection.execute(query4)
         db_data4 = result4.fetchall()
     return render_template('hospital_reports.html', data4=db_data4)
-
+    
 @app.route('/patients')
 def patients():
     with engine.connect() as connection:
         query1 = text('SELECT * FROM patients')
         result1 = connection.execute(query1)
-        db_data1 = result1.fetchall()
-    return render_template('patients.html', data1=db_data1)
+        db = result1.fetchall()
+        return render_template('patients.html', data1=db)
 
 @app.route('/doctors')
 def doctors():
@@ -143,4 +143,5 @@ def error():
         return "Please Try Again!"
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(debug=False, host = '0.0.0.0', port = 8080)
+
