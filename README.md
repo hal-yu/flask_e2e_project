@@ -1,5 +1,7 @@
 # flask_e2e_project
 
+Web App: https://finale.azurewebsites.net
+
 ## Web Service
 My web service in this repository is a simple Flask app that displays the overall percentage of hospitals reporting one or more elements for the previous week. This file updated weekly on Mondays. The reported list includes hospitals that are registered with the CMS and does not include pschiatric, rehabilitation, IHS facilities, or U.S Dept. of Veterans.
 
