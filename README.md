@@ -30,7 +30,7 @@ My web service in this repository is a simple Flask app that displays the overal
 7. Download Azure CLI using ```curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash```. Use the link to login and authenticate 
 8. Use ```az webapp up --name <NAME> --runtime PYTHON:3.9 --sku B1``` to create a web app
 9. Click on the link it gives you once deployed and it should take you to your web page.
-- [Azure Connection](e.g: [docker](https://github.com/hal-yu/flask_e2e_project/blob/main/docs/Azure_connection.png)
+- [Azure Connection](https://github.com/hal-yu/flask_e2e_project/blob/main/docs/Azure_connection.png)
 
 ## ENV File Template
 MySQL Connection:
